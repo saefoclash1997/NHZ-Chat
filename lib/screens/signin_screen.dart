@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nhz_chat/background_decoration.dart';
-import 'package:nhz_chat/custom_text_form_field.dart';
-import 'package:nhz_chat/forget_password_screen.dart';
-
-import 'constants.dart';
-import 'custom_button.dart';
+import 'package:nhz_chat/components/background_decoration.dart';
+import '../components/custom_text_form_field.dart';
+import '../constants.dart';
+import '../components/custom_button.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+
+import 'forget_password_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
@@ -83,6 +83,9 @@ class SignInScreen extends StatelessWidget {
                 tag: "signInHero",
                 child: CustomButton(title: "Sign In",
                 onPressed: (){
+
+                  //TODO: do this part
+
                   print(emailController.text.trim());
                 },
 

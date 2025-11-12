@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nhz_chat/signin_screen.dart';
-import 'package:nhz_chat/welcome_screen.dart';
+import 'package:nhz_chat/screens/signin_screen.dart';
+import 'package:nhz_chat/screens/welcome_screen.dart';
 
 void main() {
   runApp(const MyApp());

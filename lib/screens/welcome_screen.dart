@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nhz_chat/background_decoration.dart';
-import 'package:nhz_chat/signin_screen.dart';
-import 'package:nhz_chat/signup_screen.dart';
+import 'package:nhz_chat/components/background_decoration.dart';
+import 'package:nhz_chat/screens/signin_screen.dart';
+import 'package:nhz_chat/screens/signup_screen.dart';
 
-import 'constants.dart';
-import 'custom_button.dart';
+import '../constants.dart';
+import '../components/custom_button.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
 class WelcomeScreen extends StatelessWidget {

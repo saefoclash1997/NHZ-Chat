@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nhz_chat/background_decoration.dart';
-
-import 'constants.dart';
-import 'custom_button.dart';
+import 'package:nhz_chat/components/background_decoration.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import '../components/custom_text_form_field.dart';
+import '../constants.dart';
 
-import 'custom_text_form_field.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   ForgetPasswordScreen({super.key});
