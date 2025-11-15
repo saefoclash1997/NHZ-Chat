@@ -6,7 +6,10 @@ import '../constants.dart';
 
 
 class ForgetPasswordScreen extends StatefulWidget {
-  ForgetPasswordScreen({super.key});
+  String? email;
+  ForgetPasswordScreen({
+    this.email
+});
 
   @override
   State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
@@ -14,9 +17,20 @@ class ForgetPasswordScreen extends StatefulWidget {
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   TextEditingController emailController = TextEditingController();
+
+
 bool isClicked = false;
+
+@override
+  void initState() {
+  emailController.text = widget.email!;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       body: BackgroundDecoration(
         child: Padding(

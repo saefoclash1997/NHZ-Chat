@@ -7,8 +7,9 @@ class CustomTextFormField extends StatefulWidget {
     super.key,
     required this.controller,
     required this.title,
+    this.validator
   });
-
+  String? Function(String?)? validator;
   final TextEditingController controller;
   final String title;
 
@@ -22,6 +23,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+     // autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: widget.validator,
       obscureText: widget.title == "Email" ? false : hidePassword,
       keyboardType: widget.title == "Email"
           ? TextInputType.emailAddress
@@ -51,6 +54,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(width: 3, color: kDarkBlue2),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: BorderSide(width: 2, color: Colors.red),
+        ),
+        focusedErrorBorder:  OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(width: 3, color: Colors.red),
         ),
         label: Text(widget.title),
 

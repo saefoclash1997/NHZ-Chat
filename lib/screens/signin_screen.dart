@@ -12,86 +12,113 @@ class SignInScreen extends StatelessWidget {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  signIn() {
+    if (_formKey.currentState!.validate()) {
+      print(emailController.text.trim());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BackgroundDecoration(
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                children: [
-                  Hero(
+      body: Form(
+        key: _formKey,
+        child: BackgroundDecoration(
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  children: [
+                    Hero(
+                      tag: "imageHero",
+                      child: Image.asset(
+                        "assets/images/app_icon.png",
+                        width: 100,
+                      ),
+                    ),
 
+                    SizedBox(width: 12),
+                    DefaultTextStyle(
+                      style: const TextStyle(
+                        fontSize: 60.0,
+                        color: Colors.blue,
+                      ),
+                      child: AnimatedTextKit(
+                        animatedTexts: [
+                          TypewriterAnimatedText(
+                            "Sign In",
+                            textAlign: TextAlign.center,
+                            speed: Duration(milliseconds: 50),
+                          ),
+                        ],
+                        onTap: () {
+                          print("Tap Event");
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 8),
 
-                      tag: "imageHero",child: Image.asset("assets/images/app_icon.png", width: 100)),
+                CustomTextFormField(
+                  controller: emailController,
+                  title: 'Email',
+                  validator: (val) {
+                    if (val == null || val.isEmpty) {
+                      return "Enter Email";
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 8),
 
+                CustomTextFormField(
+                  controller: passwordController,
+                  title: 'Password',
+                  validator: (val) {
+                    if (val == null || val.isEmpty) {
+                      return "Enter Password";
+                    } else if (val.length < 6) {
+                      return "Weak Password";
+                    }
+                    return null;
+                  },
+                ),
 
-                  SizedBox(width: 12),
-                  DefaultTextStyle(
-                    style: const TextStyle(fontSize: 60.0, color: Colors.blue),
-                    child: AnimatedTextKit(
-                      animatedTexts: [
-                        TypewriterAnimatedText(
-                          "Sign In",
-                          textAlign: TextAlign.center,
-                          speed: Duration(milliseconds: 50),
+                Align(
+                  alignment: AlignmentGeometry.centerRight,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ForgetPasswordScreen(
+                            email : emailController.text.trim()
+                          ),
                         ),
-                      ],
-                      onTap: () {
-                        print("Tap Event");
-                      },
+                      );
+                    },
+                    child: Text(
+                      "Forget Password?",
+                      style: TextStyle(color: kDarkBlue2),
                     ),
                   ),
-                ],
-              ),
-              SizedBox(height: 8,),
-
-              CustomTextFormField(
-
-                controller: emailController, title: 'Email',
-
-              ),
-              SizedBox(height: 8,),
-
-              CustomTextFormField(
-
-                controller: passwordController, title: 'Password',
-
-              ),
-
-              Align(
-                alignment: AlignmentGeometry.centerRight,
-                child: TextButton(onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgetPasswordScreen()));
-                }, child:
-                Text("Forget Password?",
-                style: TextStyle(
-                  color: kDarkBlue2
                 ),
-                )
 
+                Hero(
+                  tag: "signInHero",
+                  child: CustomButton(
+                    title: "Sign In",
+                    onPressed: () {
+                      signIn();
+                    },
+                  ),
                 ),
-              ),
-
-              Hero(
-
-
-                tag: "signInHero",
-                child: CustomButton(title: "Sign In",
-                onPressed: (){
-
-                  //TODO: do this part
-
-                  print(emailController.text.trim());
-                },
-
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
