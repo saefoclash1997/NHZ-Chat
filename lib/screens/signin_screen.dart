@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nhz_chat/components/background_decoration.dart';
+import 'package:nhz_chat/components/loading_screen.dart';
+import 'package:nhz_chat/screens/chat_screen.dart';
 import '../components/custom_text_form_field.dart';
 import '../constants.dart';
 import '../components/custom_button.dart';
@@ -9,19 +11,24 @@ import 'forget_password_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
+  bool isLoading = false;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   signIn() {
+    isLoading = true;
     if (_formKey.currentState!.validate()) {
       print(emailController.text.trim());
     }
+
+    isLoading = false;
+
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return isLoading ? LoadingScreen() : Scaffold(
       body: Form(
         key: _formKey,
         child: BackgroundDecoration(
@@ -113,7 +120,8 @@ class SignInScreen extends StatelessWidget {
                   child: CustomButton(
                     title: "Sign In",
                     onPressed: () {
-                      signIn();
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatScreen()));
+                    //  signIn();
                     },
                   ),
                 ),
