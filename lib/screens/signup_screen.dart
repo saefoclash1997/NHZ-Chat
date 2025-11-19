@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nhz_chat/components/background_decoration.dart';
+import 'package:nhz_chat/components/fade_animation.dart';
 import '../components/custom_button.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import '../components/custom_text_form_field.dart';
@@ -30,8 +31,8 @@ class SignUpScreen extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Hero(
-                      tag: "imageHero",
+                    FadeAnimation(
+                      delay: 200,
                       child: Image.asset(
                         "assets/images/app_icon.png",
                         width: 100,
@@ -39,75 +40,82 @@ class SignUpScreen extends StatelessWidget {
                     ),
 
                     SizedBox(width: 12),
-                    DefaultTextStyle(
-                      style: const TextStyle(
-                        fontSize: 60.0,
-                        color: Colors.blue,
-                      ),
-                      child: AnimatedTextKit(
-                        animatedTexts: [
-                          TypewriterAnimatedText(
-                            "Sign Up",
-                            textAlign: TextAlign.center,
-                            speed: Duration(milliseconds: 50),
-                          ),
-                        ],
-                        onTap: () {
-                          print("Tap Event");
-                        },
+                    FadeAnimation(
+                      delay: 400,                      child: DefaultTextStyle(
+                        style: const TextStyle(
+                          fontSize: 60.0,
+                          color: Colors.blue,
+                        ),
+                        child: AnimatedTextKit(
+                          animatedTexts: [
+                            TypewriterAnimatedText(
+                              "Sign Up",
+                              textAlign: TextAlign.center,
+                              speed: Duration(milliseconds: 50),
+                            ),
+                          ],
+                          onTap: () {
+                            print("Tap Event");
+                          },
+                        ),
                       ),
                     ),
                   ],
                 ),
                 SizedBox(height: 8),
 
-                CustomTextFormField(
-                  controller: emailController,
-                  title: 'Email',
-                  validator: (val) {
-                    if (val == null || val.isEmpty) {
-                      return "Enter Email";
-                    }
-                    return null;
-                  },
+                FadeAnimation(
+                  delay: 600,                   child: CustomTextFormField(
+                    controller: emailController,
+                    title: 'Email',
+                    validator: (val) {
+                      if (val == null || val.isEmpty) {
+                        return "Enter Email";
+                      }
+                      return null;
+                    },
+                  ),
                 ),
                 SizedBox(height: 8),
 
-                CustomTextFormField(
-                  controller: passwordController,
-                  title: 'Password',
-                  validator: (val) {
-                    if (val == null || val.isEmpty) {
-                      return "Enter Password";
-                    } else if (val.length < 6) {
-                      return "Weak Password";
-                    }
-                    return null;
-                  },
+                FadeAnimation(
+                  delay: 800,                   child: CustomTextFormField(
+                    controller: passwordController,
+                    title: 'Password',
+                    validator: (val) {
+                      if (val == null || val.isEmpty) {
+                        return "Enter Password";
+                      } else if (val.length < 6) {
+                        return "Weak Password";
+                      }
+                      return null;
+                    },
+                  ),
                 ),
 
                 SizedBox(height: 8),
-                CustomTextFormField(
-                  controller: confirmPasswordController,
-                  title: 'Confirm Password',
-                  validator: (val) {
-                    if (val == null || val.isEmpty) {
-                      return "Enter Password";
-                    } else if (val.length < 6) {
-                      return "Weak Password";
-                    } else if (passwordController.text !=
-                        confirmPasswordController.text) {
-                      return "Password didn't match";
-                    }
-                    return null;
-                  },
+                FadeAnimation(
+                  delay: 1000,                   child: CustomTextFormField(
+                    controller: confirmPasswordController,
+                    title: 'Confirm Password',
+                    validator: (val) {
+                      if (val == null || val.isEmpty) {
+                        return "Enter Password";
+                      } else if (val.length < 6) {
+                        return "Weak Password";
+                      } else if (passwordController.text !=
+                          confirmPasswordController.text) {
+                        return "Password didn't match";
+                      }
+                      return null;
+                    },
+                  ),
                 ),
 
                 SizedBox(height: 8),
 
-                Hero(
-                  tag: "signUpHero",
-                  child: CustomButton(
+                FadeAnimation(
+                  delay: 1200,                       child: CustomButton(
                     title: "Sign Up",
                     onPressed: () {
                       signUp();
