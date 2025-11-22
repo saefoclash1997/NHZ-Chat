@@ -17,6 +17,8 @@ dependencies:
   neon_widgets: ^2.0.0
   flutter_spinkit: ^5.2.2
   simple_animations: ^5.2.0
+  firebase_auth:
+  firebase_core: ^4.2.1
 
 dev_dependencies:
   flutter_test:

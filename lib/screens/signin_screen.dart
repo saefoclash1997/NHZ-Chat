@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nhz_chat/components/background_decoration.dart';
 import 'package:nhz_chat/components/loading_screen.dart';
@@ -19,7 +20,7 @@ class SignInScreen extends StatelessWidget {
   signIn() {
     isLoading = true;
     if (_formKey.currentState!.validate()) {
-      print(emailController.text.trim());
+      FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text.trim(), password: passwordController.text.trim());
     }
 
     isLoading = false;
