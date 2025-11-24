@@ -10,6 +10,7 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         leading:  Padding(
           padding: const EdgeInsets.all(6.0),
