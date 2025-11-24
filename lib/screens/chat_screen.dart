@@ -1,11 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:nhz_chat/constants.dart';
 
 import '../components/custom_drawer.dart';
 
 class ChatScreen extends StatelessWidget {
-  const ChatScreen({super.key});
-
+   ChatScreen({super.key});
+  TextEditingController messageController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +41,7 @@ class ChatScreen extends StatelessWidget {
           children: [
             Expanded(
               child: TextField(
+                controller: messageController,
                 maxLines: 5,
                 minLines: 1,
                 decoration: InputDecoration(
@@ -52,7 +54,14 @@ class ChatScreen extends StatelessWidget {
                 ),
               ),
             ),
-            IconButton(onPressed: (){}, icon: Icon(Icons.send),
+            IconButton(onPressed: (){
+            FirebaseFirestore.instance.collection("messages").doc().set(
+              {
+                "text" : messageController.text
+              }
+            );
+
+            }, icon: Icon(Icons.send),
               color: Colors.white,
 
               style: ButtonStyle(

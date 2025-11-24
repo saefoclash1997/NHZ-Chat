@@ -6,7 +6,7 @@ plugins {
 
 }
 
-llprojects {
+allprojects {
     repositories {
         google()
         mavenCentral()

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nhz_chat/authentication_services.dart';
 import 'package:nhz_chat/constants.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -26,8 +27,7 @@ class CustomDrawer extends StatelessWidget {
 
             ),
             onTap: (){
-              Navigator.pop(context);
-              print("Sign Out");
+              AuthenticationServices().signOut();
             },
 
           ),

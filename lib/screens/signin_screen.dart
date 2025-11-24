@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nhz_chat/components/background_decoration.dart';
 import 'package:nhz_chat/components/loading_screen.dart';
 import 'package:nhz_chat/screens/chat_screen.dart';
+import '../authentication_services.dart';
 import '../components/custom_text_form_field.dart';
 import '../constants.dart';
 import '../components/custom_button.dart';
@@ -10,21 +11,52 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 
 import 'forget_password_screen.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   SignInScreen({super.key});
+
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
   bool isLoading = false;
 
   TextEditingController emailController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
+
+  AuthenticationServices  authenticationServices = AuthenticationServices();
+
   final _formKey = GlobalKey<FormState>();
-  signIn() {
-    isLoading = true;
+
+  signIn(BuildContext context) async {
+
     if (_formKey.currentState!.validate()) {
-      FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text.trim(), password: passwordController.text.trim());
+      setState(() {
+        isLoading = true;
+      });
+      String? user = await  authenticationServices.signIn(emailController.text.trim(), passwordController.text.trim());
+      if(user == null){
+        setState(() {
+          isLoading = false;
+        });
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ChatScreen()), (route) => false,);
+      }else{
+        setState(() {
+          isLoading = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(user),
+
+          ),
+        );
+
+      }
     }
-
-    isLoading = false;
-
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -121,8 +153,7 @@ class SignInScreen extends StatelessWidget {
                   child: CustomButton(
                     title: "Sign In",
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatScreen()));
-                    //  signIn();
+                    signIn(context);
                     },
                   ),
                 ),

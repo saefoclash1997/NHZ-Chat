@@ -1,26 +1,66 @@
 import 'package:flutter/material.dart';
+import 'package:nhz_chat/authentication_services.dart';
 import 'package:nhz_chat/components/background_decoration.dart';
 import 'package:nhz_chat/components/fade_animation.dart';
+import 'package:nhz_chat/components/loading_screen.dart';
+import 'package:nhz_chat/screens/chat_screen.dart';
 import '../components/custom_button.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import '../components/custom_text_form_field.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   SignUpScreen({super.key});
 
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  bool isLoading = false;
+
+  AuthenticationServices  authenticationServices = AuthenticationServices();
+
   TextEditingController emailController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
+
   TextEditingController confirmPasswordController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
-  signUp() {
+
+  signUp(BuildContext context) async {
+
     if (_formKey.currentState!.validate()) {
-      print(emailController.text.trim());
+      setState(() {
+        isLoading = true;
+      });
+    String? user = await  authenticationServices.signUp(emailController.text.trim(), passwordController.text.trim());
+    if(user == null){
+      setState(() {
+        isLoading = false;
+      });
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ChatScreen()), (route) => false,);
+    }else{
+      setState(() {
+        isLoading = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(user),
+
+        ),
+      );
+
     }
+    }
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return isLoading ? LoadingScreen() :  Scaffold(
       body: Form(
         key: _formKey,
         child: BackgroundDecoration(
@@ -118,7 +158,7 @@ class SignUpScreen extends StatelessWidget {
                   delay: 1200,                       child: CustomButton(
                     title: "Sign Up",
                     onPressed: () {
-                      signUp();
+                      signUp(context);
                     },
                   ),
                 ),
