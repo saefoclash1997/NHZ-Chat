@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:lottie/lottie.dart';
+import 'package:nhz_chat/constants.dart';
 import 'package:nhz_chat/screens/welcome_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -109,6 +110,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               effect: WormEffect(
                 dotHeight: 10,
                 dotWidth: 10,
+                activeDotColor: kDarkBlue2
               ),
             ),
 
@@ -125,6 +127,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
+                      backgroundColor: kDarkBlue1,
+
                     ),
                     child: Text(
                       "Let's Go!",

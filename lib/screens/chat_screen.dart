@@ -1,39 +1,35 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nhz_chat/constants.dart';
 
 import '../components/custom_drawer.dart';
 
 class ChatScreen extends StatelessWidget {
-   ChatScreen({super.key});
+  ChatScreen({super.key});
+
   TextEditingController messageController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
-        leading:  Padding(
+        leading: Padding(
           padding: const EdgeInsets.all(6.0),
           child: Hero(
             tag: "imageHero",
-            child: Image.asset(
-              "assets/images/app_icon.png",
-
-            ),
+            child: Image.asset("assets/images/app_icon.png"),
           ),
         ),
-        iconTheme: IconThemeData(
-          color: Colors.white
-        ),
+        iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: kDarkBlue1,
         title: Text("NHZ Chat App"),
         titleTextStyle: TextStyle(
           color: Colors.white,
           fontSize: 24.0,
           fontWeight: FontWeight.w500,
-          fontFamily: "times"
+          fontFamily: "times",
         ),
-
       ),
       endDrawer: CustomDrawer(),
       bottomSheet: Padding(
@@ -47,31 +43,32 @@ class ChatScreen extends StatelessWidget {
                 minLines: 1,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(40)
+                    borderRadius: BorderRadius.circular(40),
                   ),
                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(40)
+                    borderRadius: BorderRadius.circular(40),
                   ),
                 ),
               ),
             ),
-            IconButton(onPressed: (){
-            FirebaseFirestore.instance.collection("messages").doc().set(
-              {
-                "text" : messageController.text
-              }
-            );
-
-            }, icon: Icon(Icons.send),
+            IconButton(
+              onPressed: () async {
+                await FirebaseFirestore.instance
+                    .collection("messages")
+                    .doc()
+                    .set({
+                      "text": messageController.text,
+                      "time": DateTime.now(),
+                      "senderEmail": FirebaseAuth.instance.currentUser!.email,
+                    });
+              },
+              icon: Icon(Icons.send),
               color: Colors.white,
 
               style: ButtonStyle(
-
                 backgroundColor: WidgetStateProperty.all(kDarkBlue1),
               ),
-
-
-            )
+            ),
           ],
         ),
       ),
