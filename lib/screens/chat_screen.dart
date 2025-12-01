@@ -99,7 +99,7 @@ class ChatScreen extends StatelessWidget {
 
               return ListView.builder(
               reverse: true,
-               scrollDirection: Axis.horizontal,
+          //     scrollDirection: Axis.horizontal,
                 padding: EdgeInsets.only(bottom: 80.0,left: 8.0,right: 8.0),
                   itemCount: data.length,
                   itemBuilder: (context, index) {

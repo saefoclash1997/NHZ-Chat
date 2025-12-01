@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:nhz_chat/authentication_services.dart';
 import 'package:nhz_chat/constants.dart';
+import 'package:provider/provider.dart';
 
-class CustomDrawer extends StatefulWidget {
+import '../provider/theme_provider.dart';
+
+class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
 
   @override
-  State<CustomDrawer> createState() => _CustomDrawerState();
-}
 
-class _CustomDrawerState extends State<CustomDrawer> {
-  bool isChecked = false;
-  @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Drawer(
       //  backgroundColor: Colors.white.withOpacity(0.5),
       child: ListView(
         children: [
           CheckboxListTile(
-            value: isChecked,
+            value: themeProvider.getTheme(),
             onChanged: (val) {
-              setState(() {
-                isChecked = !isChecked;
-              });
+              themeProvider.toggleTheme();
             },
             title: Text(
               "Dark Theme",
@@ -31,11 +29,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
           ),
           SwitchListTile(
             onChanged: (val) {
-              setState(() {
-                isChecked = !isChecked;
-              });
+              themeProvider.toggleTheme();
+
             },
-            value: isChecked,
+            value:               themeProvider.getTheme()
+            ,
             title: Text(
               "Dark Theme",
               style: TextStyle(color: kDarkBlue2, fontFamily: "times"),

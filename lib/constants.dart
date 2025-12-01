@@ -16,3 +16,11 @@ LinearGradient kDarkGradient = LinearGradient(
   begin: AlignmentGeometry.topCenter,
   end: AlignmentGeometry.bottomCenter,
 );
+
+
+TextStyle ts = TextStyle(
+  color:  Colors.white,
+  fontSize: 22
+
+
+);

@@ -3,6 +3,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:lottie/lottie.dart';
 import 'package:nhz_chat/constants.dart';
 import 'package:nhz_chat/screens/welcome_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -122,7 +123,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width / 2,
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+                      prefs.setBool("firstRun",true);
+
                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>WelcomeScreen()));
                     },
                     style: ElevatedButton.styleFrom(
