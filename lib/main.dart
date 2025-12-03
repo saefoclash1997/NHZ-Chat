@@ -5,7 +5,7 @@ import 'package:nhz_chat/screens/on_boarding_screen.dart';
 import 'package:nhz_chat/themes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
-import 'authentication_wrapper.dart';
+import 'authentication/authentication_wrapper.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,19 +40,28 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => ThemeProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+      ],
+      child: Builder(
+        builder: (context) {
+          final themeProvider = Provider.of<ThemeProvider>(context);
 
-      builder: (context, child) {
-        final themeProvider = Provider.of<ThemeProvider>(context);
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
 
-        return MaterialApp(
-          theme: themeProvider.getTheme()
-              ? lightTheme
-              : darkTheme,
-          debugShowCheckedModeBanner: false,
-          home: firstRun ? AuthenticationWrapper() : OnBoardingScreen(),
-        );
-      },
+            theme: lightTheme,          // Light
+            darkTheme: darkTheme,       // Dark
+            themeMode: themeProvider.getTheme()
+                ? ThemeMode.dark
+                : ThemeMode.light,
+
+            home: firstRun
+                ? AuthenticationWrapper()
+                : OnBoardingScreen(),
+          );
+        },
+      ),
     );
   }
   // @override

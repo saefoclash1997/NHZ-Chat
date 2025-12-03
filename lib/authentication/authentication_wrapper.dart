@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nhz_chat/screens/chat_screen.dart';
 import 'package:nhz_chat/screens/welcome_screen.dart';
-import 'components/loading_screen.dart';
+import '../components/loading_screen.dart';
 
 class AuthenticationWrapper extends StatelessWidget {
   const AuthenticationWrapper({

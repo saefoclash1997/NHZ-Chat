@@ -112,7 +112,9 @@ class ChatScreen extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text( data[index]["senderEmail"],
-                              style: TextStyle(color: Colors.black45,
+                              style: TextStyle(color: data[index]["senderEmail"] == myEmail
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Theme.of(context).colorScheme.secondary,
                                   fontSize: 9.0,
                                   fontFamily: "times"
                               ),

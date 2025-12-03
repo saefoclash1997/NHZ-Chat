@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:nhz_chat/authentication_services.dart';
 import 'package:nhz_chat/constants.dart';
 import 'package:provider/provider.dart';
-
+import 'package:nhz_chat/authentication/authentication_services.dart';
 import '../provider/theme_provider.dart';
+import '../screens/api_example/screens/posts_screen.dart';
+import '../screens/nav_bar.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -24,7 +27,6 @@ class CustomDrawer extends StatelessWidget {
             },
             title: Text(
               "Dark Theme",
-              style: TextStyle(color: kDarkBlue2, fontFamily: "times"),
             ),
           ),
           SwitchListTile(
@@ -36,22 +38,46 @@ class CustomDrawer extends StatelessWidget {
             ,
             title: Text(
               "Dark Theme",
-              style: TextStyle(color: kDarkBlue2, fontFamily: "times"),
             ),
           ),
+          ListTile(
+            title: Text(
+              "Nav Example",
 
+            ),
+            leading: Icon(Icons.assistant_navigation,),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>MainNavbar()));
+            },
+          ),
+          ListTile(
+            title: Text(
+              "Api Example",
+
+            ),
+            leading: Icon(Icons.signal_wifi_connected_no_internet_4_sharp,),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>PostsScreen()));
+            },
+          ),
           ListTile(
             title: Text(
               "Sign Out",
-              style: TextStyle(
-                color: kDarkBlue1,
-                fontSize: 20,
-                fontFamily: "times",
-              ),
+
             ),
-            leading: Icon(Icons.exit_to_app, color: kDarkBlue1),
+            leading: Icon(Icons.exit_to_app,),
             onTap: () {
+              AwesomeDialog(
+                  context: context,
+                  dialogType: DialogType.info,
+                  animType: AnimType.rightSlide,
+                  title: 'Are you Sure?',
+                  btnCancelOnPress: () {},
+              btnOkOnPress: () {
               AuthenticationServices().signOut();
+              },
+              )..show();
+
             },
           ),
         ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nhz_chat/authentication_services.dart';
+import 'package:nhz_chat/authentication/authentication_services.dart';
 import 'package:nhz_chat/components/background_decoration.dart';
 import 'package:nhz_chat/components/fade_animation.dart';
 import 'package:nhz_chat/components/loading_screen.dart';

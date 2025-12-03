@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nhz_chat/components/background_decoration.dart';
 import 'package:nhz_chat/components/loading_screen.dart';
 import 'package:nhz_chat/screens/chat_screen.dart';
-import '../authentication_services.dart';
+import 'package:nhz_chat/authentication/authentication_services.dart';
 import '../components/custom_text_form_field.dart';
 import '../constants.dart';
 import '../components/custom_button.dart';
