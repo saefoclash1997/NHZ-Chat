@@ -69,10 +69,13 @@ class CustomDrawer extends StatelessWidget {
             onTap: () {
               AwesomeDialog(
                   context: context,
-                  dialogType: DialogType.info,
+                  dialogType: DialogType.success,
                   animType: AnimType.rightSlide,
+                  desc: "HIIIII",
                   title: 'Are you Sure?',
-                  btnCancelOnPress: () {},
+                  btnCancelOnPress: () {
+
+                  },
               btnOkOnPress: () {
               AuthenticationServices().signOut();
               },

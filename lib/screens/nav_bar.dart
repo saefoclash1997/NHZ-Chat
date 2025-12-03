@@ -11,6 +11,8 @@ class _MainNavbarState extends State<MainNavbar> {
   int selectedIndex = 0;
 
   List<Widget> screens = [
+   // SignInScreen(),
+
     Center(child: Text("Home", style: TextStyle(fontSize: 22))),
     Center(child: Text("Messages", style: TextStyle(fontSize: 22))),
     Center(child: Text("Settings", style: TextStyle(fontSize: 22))),
@@ -22,11 +24,11 @@ class _MainNavbarState extends State<MainNavbar> {
       body: screens[selectedIndex],
 
       bottomNavigationBar: BottomNavigationBar(
+
         currentIndex: selectedIndex,
         onTap: (index) {
           setState(() => selectedIndex = index);
         },
-
         selectedItemColor: Theme.of(context).colorScheme.primary,
         unselectedItemColor: Colors.grey,
 
@@ -38,6 +40,7 @@ class _MainNavbarState extends State<MainNavbar> {
             icon: Icon(Icons.home_outlined),
             activeIcon: Icon(Icons.home),
             label: "Home",
+            tooltip: "Home"
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.chat_outlined),
@@ -49,6 +52,7 @@ class _MainNavbarState extends State<MainNavbar> {
             activeIcon: Icon(Icons.settings),
             label: "Settings",
           ),
+
         ],
       ),
     );
